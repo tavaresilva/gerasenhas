@@ -24,7 +24,7 @@ function diminuiTamanho(){
 
 function aumentaTamanho(){
 
-     if (tamanhoSenha < 20){
+     if (tamanhoSenha < 40){
    // tamanhoSenha = tamanhoSenha+1;
      tamanhoSenha++;
 }
