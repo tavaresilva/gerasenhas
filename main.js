@@ -9,9 +9,14 @@ const botoes = document.querySelectorAll('.parametro-senha__botao');
 const campoSenha = document.querySelector('#campo-senha');
 const checkbox = document.querySelectorAll('.checkbox');
 
+
 botoes[0].onclick = diminuiTamanho;
 botoes[1].onclick = aumentaTamanho;
 
+function classificaSenha() {
+    let entropia = tamanhoSenha * Math.log2(alfabeto.length);
+    console.log(entropia);
+}
 function diminuiTamanho(){
 
     if (tamanhoSenha > 1){
@@ -21,7 +26,6 @@ function diminuiTamanho(){
     numeroSenha.textContent = tamanhoSenha;
     geraSenha();
 }
-
 function aumentaTamanho(){
 
      if (tamanhoSenha < 20){
@@ -39,13 +43,11 @@ for (i=0; i < checkbox.length;i++){
   checkbox[i].onclick = geraSenha;
 }
 
-
-
-
 geraSenha();
 
 function geraSenha() {
     let alfabeto = '';
+    classificaSenha(alfabeto.length);
     if (checkbox[0].checked) {
         alfabeto = alfabeto + letrasMaiusculas;
     }
@@ -67,13 +69,16 @@ function geraSenha() {
     campoSenha.value = senha;
     classificaSenha();
 }
-function classificaSenha(){
+function classificaSenha(tamanhoAlfabeto){
+    const valorEntropia = document.querySelector('.entropia');
+    valorEntropia.textContent = 2**Math.floor(entropia)/(100e6*60*60*24);
     forcaSenha.classList.remove('fraca','media','forte');
-    if (tamanhoSenha > 11){
+    
+    if (entropia > 11){
         forcaSenha.classList.add('forte');
-    } else if (tamanhoSenha > 5 && tamanhoSenha < 12 ) {
+    } else if (entropia > 5 && entropia < 12 ) {
         forcaSenha.classList.add('media');
-    } else if (tamanhoSenha <= 5){
+    } else if (entropia <= 5){
         forcaSenha.classList.add('fraca');
     }
 }
